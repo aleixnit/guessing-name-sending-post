@@ -12,6 +12,10 @@ let numGuesses = 1;
 let playGame = true;
 let remainingSeconds = 60;
 
+
+
+
+
 document.querySelector("#remaining-time").innerHTML = remainingSeconds;
 
 // Cada segundo (1000ms) quiero que ejecutes la función updateRemainingTime
@@ -73,9 +77,45 @@ function validateGuess(guess) {
   }
 }
 
+// async function sendGift() {
+ 
+//   // Enviamos los datos al endpoint https://singulars2023.free.beeceptor.com 
+//   const response = await fetch("https://singulars2023.free.beeceptor.com", {
+//       // especificamos que queremos hacer un POST
+//       method: "POST",
+//       // Especificamos el formato de los datos que enviamos
+//       headers: {
+//           "Content-Type": "application/json",
+//       },
+//       // body son los datos que enviamos en formato string
+//       body: JSON.stringify(regalo),
+//   });
+
+//   // La respuesta del servidor a ver si ha llegado bien nuestro datos
+//   const data = await response.json();
+//   console.log(data);
+// }
+
+
 // ¿En que punto del código hay que invocar a esta función?
 async function sendScoreToServer() {
+
   // TODO: CODE ME!!
+  const resultado = {
+    "machine": "Aleix",
+    "elapsed_time": 60 - remainingSeconds,
+    "attempts": numGuesses
+  }
+  
+  const response = await fetch ('https://omiras-reimagined-rotary-phone-rpgp96g5x7fx55x-3000.preview.app.github.dev/score', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(resultado),
+  });
+  const data = await response.json();
+    console.log(data);
   console.log("Enviando los datos al servidor de King.com"); //POST
 }
 
